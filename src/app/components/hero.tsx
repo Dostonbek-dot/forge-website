@@ -1,38 +1,48 @@
-import heroImage from "../../imports/HomeDesktopWeb/de613366d5c3e23d19342f4ebad7e64694c33ecb.webp";
-import { Container, PrimaryButton, SecondaryButton, fluid } from "./primitives";
+import { motion } from "motion/react";
+import productImage from "../../imports/HomeDesktopWeb/core-whey-isolate.webp";
+import { Container, fluid } from "./primitives";
+import { useMotionPreset } from "./motion";
 
 export function Hero() {
-  return (
-    <section className="w-full bg-[#fafaf8] lg:bg-white">
-      <Container>
-        {/* At 1440 the row resolves to the Figma composition: 560 + 130 gap + 480. */}
-        <div className="flex flex-col items-start gap-[24px] pb-[40px] pt-[32px] lg:flex-row lg:items-center lg:justify-between lg:gap-[40px] lg:pb-[120px] lg:pt-[72px] xl:w-[min(1170px,100%)]">
-          <div className="flex w-full min-w-0 flex-col items-start gap-[24px] lg:max-w-[560px] lg:gap-[26px]">
-            <h1
-              className="w-full font-['Archivo',sans-serif] font-bold leading-[1.06] tracking-[-0.36px] text-[#14171a] lg:leading-[0.98] lg:tracking-[-1.02px]"
-              style={{ fontSize: fluid(36, 68) }}
-            >
-              Supplements built for training.
-            </h1>
-            <p className="w-full font-['Inter',sans-serif] text-[14.5px] leading-[1.5] text-[#666b66] lg:max-w-[440px] lg:text-[16.5px] lg:leading-[1.55]">
-              Clean-label protein, creatine and pre-workout, formulated with clinical doses and verified by independent labs — not just on the
-              label.
-            </p>
-            <div className="flex w-full flex-col items-stretch gap-[10px] sm:w-auto sm:flex-row sm:items-center sm:gap-[16px] lg:pt-[10px]">
-              <PrimaryButton className="w-full sm:w-auto">Shop Bestsellers</PrimaryButton>
-              <SecondaryButton className="w-full sm:w-auto">See the Science</SecondaryButton>
-            </div>
-          </div>
+  const { fadeUp, transition } = useMotionPreset();
 
-          <div className="h-[300px] w-full overflow-hidden rounded-[24px] lg:h-[448px] lg:w-[clamp(340px,33.4vw,480px)] lg:shrink-0 lg:rounded-[32px]">
-            <img
-              src={heroImage}
-              alt="Scoop of protein powder being lifted from a black shaker cup on a dark countertop."
-              className="size-full object-cover"
-            />
-          </div>
-        </div>
-      </Container>
+  return (
+    <section className="relative w-full overflow-hidden bg-white">
+      {/*
+        Below lg: image and headline stack normally — the desktop bleed treatment only
+        works because there's a full 560px-safe column before the image starts; there's
+        no room for that on narrow screens without the two colliding.
+        At lg+: matches the Figma frame (1440x680) — image bled to the right edge and
+        cropped by the frame height, headline bottom-anchored at left:120/bottom:72.
+      */}
+      <div className="relative mx-auto flex flex-col lg:block lg:h-[680px] lg:max-w-[1440px]">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={transition(0.12)}
+          className="relative aspect-[6/5] w-full overflow-hidden lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:h-auto lg:w-[493px] xl:w-[560px]"
+        >
+          <img
+            src={productImage}
+            alt="Core Whey Isolate — 900g, 30 servings, 25g protein per scoop."
+            className="size-full object-cover object-top"
+          />
+        </motion.div>
+
+        <Container className="relative py-[32px] lg:absolute lg:inset-0 lg:flex lg:items-end lg:py-0">
+          <motion.h1
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            transition={transition(0)}
+            className="max-w-[560px] font-['Archivo',sans-serif] font-bold leading-[1.06] tracking-[-0.36px] text-[#14171a] lg:pb-[72px] lg:leading-[0.98] lg:tracking-[-1.02px]"
+            style={{ fontSize: fluid(36, 68) }}
+          >
+            Supplements built for training.
+          </motion.h1>
+        </Container>
+      </div>
     </section>
   );
 }

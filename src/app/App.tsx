@@ -1,23 +1,32 @@
-import { Bestsellers } from "./components/bestsellers";
-import { Categories } from "./components/categories";
-import { Hero } from "./components/hero";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { SiteFooter } from "./components/site-footer";
 import { SiteNav } from "./components/site-nav";
-import { Testimonials } from "./components/testimonials";
-import { TrustBand } from "./components/trust-band";
-import { WhyForge } from "./components/why-forge";
+import { AboutPage } from "./pages/AboutPage";
+import { HomePage } from "./pages/HomePage";
+import { ProteinPage } from "./pages/ProteinPage";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 export default function App() {
   return (
     <div className="min-h-screen w-full bg-[#fafaf8] font-['Inter',sans-serif] antialiased">
+      <ScrollToTop />
       <SiteNav />
       <main>
-        <Hero />
-        <TrustBand />
-        <WhyForge />
-        <Categories />
-        <Bestsellers />
-        <Testimonials />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/protein" element={<ProteinPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
       </main>
       <SiteFooter />
     </div>

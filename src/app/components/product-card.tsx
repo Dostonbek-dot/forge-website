@@ -13,7 +13,7 @@ export type Product = {
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="flex h-full flex-col gap-[8px] rounded-[16px] border border-[#e5e5de] bg-white px-[10px] pb-[12px] pt-[10px] lg:gap-[14px] lg:rounded-[20px] lg:px-[16px] lg:pb-[20px] lg:pt-[16px]">
+    <article className="flex h-full flex-col gap-[8px] rounded-[16px] border border-[#e5e5de] bg-white px-[10px] pb-[12px] pt-[10px] transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-md lg:gap-[14px] lg:rounded-[20px] lg:px-[16px] lg:pb-[20px] lg:pt-[16px]">
       {/* 5:4 resolves to the Figma sizes at both ends: 148x120 at 390px, 250x200 at 1440px. */}
       <div className="relative aspect-[5/4] w-full overflow-hidden rounded-[10px] lg:rounded-[14px]">
         <img src={product.image} alt={product.alt} className="size-full object-cover" />

@@ -1,4 +1,6 @@
+import { motion } from "motion/react";
 import { Container, fluid } from "./primitives";
+import { useMotionPreset, viewportOnce } from "./motion";
 
 const COMPACT_QUOTES = [
   {
@@ -14,10 +16,18 @@ const COMPACT_QUOTES = [
 ];
 
 export function Testimonials() {
+  const { fadeUp, transition } = useMotionPreset();
+
   return (
     <section aria-label="Customer testimonials" className="w-full bg-[#fafaf8]">
       <Container>
-        <div className="grid gap-[20px] pb-[24px] pt-[48px] lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-x-[64px] lg:pb-[56px] lg:pt-[53px] xl:grid-cols-[minmax(0,560px)_minmax(0,420px)] xl:gap-x-[160px]">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp}
+          transition={transition()}
+          className="grid gap-[20px] pb-[24px] pt-[48px] lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-x-[64px] lg:pb-[56px] lg:pt-[53px] xl:grid-cols-[minmax(0,560px)_minmax(0,420px)] xl:gap-x-[160px]">
           <figure className="flex flex-col items-start gap-[20px] lg:max-w-[560px] lg:gap-0">
             <span
               aria-hidden
@@ -37,7 +47,7 @@ export function Testimonials() {
             </figcaption>
           </figure>
 
-          <div className="flex flex-col gap-[20px] lg:mt-[43px] lg:gap-0">
+          <div className="flex flex-col gap-[20px] lg:mt-[70px] lg:gap-0">
             {COMPACT_QUOTES.map((item, index) => (
               <figure
                 key={item.id}
@@ -54,7 +64,7 @@ export function Testimonials() {
               </figure>
             ))}
           </div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

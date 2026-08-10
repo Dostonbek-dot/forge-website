@@ -1,9 +1,11 @@
-import creatineImage from "../../imports/HomeDesktopWeb/ffb81ecd9f77384609096d5f5789d0ed4790fcb3.webp";
+import { motion } from "motion/react";
+import creatineImage from "../../imports/HomeDesktopWeb/creatine-monohydrate-v2.webp";
 import vitalityImage from "../../imports/HomeDesktopWeb/c2ca437d27f4f830ffdede88eec53b2ae6abb28e.webp";
 import preWorkoutImage from "../../imports/HomeDesktopWeb/a8bc9982346d4c2fce4fcf9eded71f8615318efb.webp";
-import wheyImage from "../../imports/HomeDesktopWeb/b9035de166f8ff41e807a93a3552d179cd53f6fa.webp";
+import wheyImage from "../../imports/HomeDesktopWeb/whey-isolate-pro-v2.webp";
 import { ProductCard, type Product } from "./product-card";
 import { Container, linkClass } from "./primitives";
+import { useMotionPreset, viewportOnce } from "./motion";
 
 const PRODUCTS: Product[] = [
   {
@@ -47,6 +49,8 @@ const PRODUCTS: Product[] = [
 ];
 
 export function Bestsellers() {
+  const { fadeUpItem, staggerContainer } = useMotionPreset();
+
   return (
     <section className="w-full bg-[#fafaf8]">
       <Container>
@@ -59,13 +63,21 @@ export function Bestsellers() {
             </a>
           </div>
 
-          <ul className="grid grid-cols-2 gap-[14px] lg:grid-cols-4 lg:gap-[24px] lg:pb-[40px]">
+          <motion.ul
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={staggerContainer()}
+            className="grid grid-cols-2 gap-[14px] lg:grid-cols-4 lg:gap-[24px] lg:pb-[40px]"
+          >
             {PRODUCTS.map((product, index) => (
               <li key={product.id} className={index % 2 === 1 ? "lg:translate-y-[40px]" : undefined}>
-                <ProductCard product={product} />
+                <motion.div variants={fadeUpItem} className="h-full">
+                  <ProductCard product={product} />
+                </motion.div>
               </li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
       </Container>
     </section>

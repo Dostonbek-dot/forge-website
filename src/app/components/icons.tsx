@@ -35,6 +35,14 @@ export function MenuIcon({ className = "size-[22px]" }: { className?: string }) 
   );
 }
 
+export function CloseIcon({ className = "size-[22px]" }: { className?: string }) {
+  return (
+    <svg aria-hidden className={className} fill="none" viewBox="0 0 22 22">
+      <path d="M5.5 5.5L16.5 16.5M16.5 5.5L5.5 16.5" stroke="currentColor" strokeLinecap="round" strokeWidth="1.65" />
+    </svg>
+  );
+}
+
 export function CheckIcon({ className = "size-[14px] lg:size-[15px]" }: { className?: string }) {
   return (
     <svg aria-hidden className={`shrink-0 ${className}`} fill="none" viewBox="0 0 15 15">

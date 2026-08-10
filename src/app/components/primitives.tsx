@@ -1,3 +1,4 @@
+import { Slot } from "@radix-ui/react-slot";
 import type { ReactNode } from "react";
 
 /**
@@ -21,29 +22,42 @@ export function fluid(minPx: number, maxPx: number, minVw = 390, maxVw = 1440) {
 const focusRing =
   "outline-none focus-visible:ring-2 focus-visible:ring-[#32523d] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafaf8]";
 
-export function PrimaryButton({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return (
-    <button
-      type="button"
-      className={`inline-flex min-h-[44px] items-center justify-center rounded-[100px] bg-[#32523d] px-[30px] py-[15px] font-['Inter',sans-serif] text-[14.5px] font-semibold text-white transition-colors hover:bg-[#294231] ${focusRing} ${className}`}
-    >
-      {children}
-    </button>
-  );
-}
+// For use on the brand-green (#32523d) background itself, where the default
+// dark-on-transparent styling is invisible against its own backdrop.
+const focusRingInverted =
+  "outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#32523d]";
 
-export function SecondaryButton({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function PrimaryButton({
+  children,
+  className = "",
+  asChild = false,
+  variant = "default",
+}: {
+  children: ReactNode;
+  className?: string;
+  /** Render as the child element (e.g. a router `Link`) instead of a `<button>` — for real navigation, not a button wrapping an anchor. */
+  asChild?: boolean;
+  /** "inverted" is for placement directly on the brand-green (#32523d) background — default is invisible there. */
+  variant?: "default" | "inverted";
+}) {
+  const Comp = asChild ? Slot : "button";
+  // "inverted" values match Figma's export for the About page's CTA button exactly:
+  // bg #5B7564, text #F8F8F6, font-weight 400 — a lighter weight than the default variant.
+  const variantClass =
+    variant === "inverted"
+      ? `bg-[#5B7564] text-[#F8F8F6] font-normal hover:bg-[#47614F] ${focusRingInverted}`
+      : `bg-[#32523d] text-white font-semibold hover:bg-[#5B7564] ${focusRing}`;
   return (
-    <button
-      type="button"
-      className={`inline-flex min-h-[44px] items-center justify-center rounded-[100px] border border-[#bfbfb8] px-[26px] py-[15px] font-['Inter',sans-serif] text-[14.5px] font-semibold text-[#14171a] transition-colors hover:bg-[#f0f0ea] ${focusRing} ${className}`}
+    <Comp
+      type={asChild ? undefined : "button"}
+      className={`inline-flex min-h-[44px] items-center justify-center rounded-[100px] px-[30px] py-[15px] font-['Inter',sans-serif] text-[14.5px] transition duration-200 ease-out active:scale-[0.97] ${variantClass} ${className}`}
     >
       {children}
-    </button>
+    </Comp>
   );
 }
 
 /** Display is intentionally left to the caller so responsive `hidden`/`flex` variants win. */
-export const iconButtonClass = `size-[44px] items-center justify-center rounded-full text-[#14171a] transition-colors hover:bg-black/5 ${focusRing}`;
+export const iconButtonClass = `size-[44px] items-center justify-center rounded-full text-[#14171a] transition duration-200 ease-out hover:bg-black/5 active:scale-[0.95] ${focusRing}`;
 
-export const linkClass = `rounded-[4px] ${focusRing}`;
+export const linkClass = `rounded-[4px] transition-colors duration-200 ease-out ${focusRing}`;

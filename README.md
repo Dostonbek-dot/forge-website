@@ -1,11 +1,18 @@
+# Forge
 
-  # Convert Figma Design to Website
+Marketing site for Forge, a clean-label sports supplements brand. Built with React, Vite, Tailwind CSS v4, and Radix/shadcn primitives, originally generated from a Figma design and since built out by hand.
 
-  This is a code bundle for Convert Figma Design to Website. The original project is available at https://www.figma.com/design/oj4cThUurN2OLtWcWIo5Bh/Convert-Figma-Design-to-Website.
+## Running the code
 
-  ## Running the code
+```bash
+npm install
+npm run dev
+```
 
-  Run `npm i` to install the dependencies.
+Then open the printed local URL (defaults to `http://localhost:5173`).
 
-  Run `npm run dev` to start the development server.
-  
+## Scripts
+
+- `npm run dev` — start the dev server
+- `npm run build` — production build to `dist/`
+- `npm run typecheck` — run the TypeScript compiler with no output
