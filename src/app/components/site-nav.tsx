@@ -9,7 +9,7 @@ export function SiteNav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="w-full border-b border-[#e5e5de] bg-[#fafaf8] lg:border-b-0 lg:bg-white">
+    <header className="sticky top-0 z-50 w-full border-b border-[#e5e5de] bg-[#fafaf8] lg:border-b-0 lg:bg-white">
       <Container>
         <nav aria-label="Main" className="flex items-center justify-between py-[12px] lg:py-[24px]">
           <Link
