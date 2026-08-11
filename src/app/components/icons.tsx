@@ -59,6 +59,22 @@ export function ArrowRightIcon({ className = "size-[18px] lg:size-[20px]" }: { c
   );
 }
 
+export function PlusIcon({ className = "size-[14px]" }: { className?: string }) {
+  return (
+    <svg aria-hidden className={className} fill="none" viewBox="0 0 14 14">
+      <path d="M7 1.16667V12.8333M1.16667 7H12.8333" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+export function MinusIcon({ className = "size-[14px]" }: { className?: string }) {
+  return (
+    <svg aria-hidden className={className} fill="none" viewBox="0 0 14 14">
+      <path d="M1.16667 7H12.8333" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export function StarIcon({ className = "size-[11px] lg:size-[13px]" }: { className?: string }) {
   return (
     <svg aria-hidden className={`shrink-0 ${className}`} fill="none" viewBox="0 0 13 13">

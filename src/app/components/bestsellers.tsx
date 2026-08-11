@@ -1,66 +1,28 @@
 import { motion } from "motion/react";
-import creatineImage from "../../imports/HomeDesktopWeb/creatine-monohydrate-v2.webp";
-import vitalityImage from "../../imports/HomeDesktopWeb/c2ca437d27f4f830ffdede88eec53b2ae6abb28e.webp";
-import preWorkoutImage from "../../imports/HomeDesktopWeb/a8bc9982346d4c2fce4fcf9eded71f8615318efb.webp";
-import wheyImage from "../../imports/HomeDesktopWeb/whey-isolate-pro-v2.webp";
-import { ProductCard, type Product } from "./product-card";
+import { Link } from "react-router-dom";
+import { PRODUCTS } from "../data/products";
+import { ProductCard } from "./product-card";
 import { Container, linkClass } from "./primitives";
 import { useMotionPreset, viewportOnce } from "./motion";
+import { useCart } from "../context/CartContext";
 
-const PRODUCTS: Product[] = [
-  {
-    id: "whey-isolate-pro",
-    name: "Whey Isolate Pro",
-    variant: "Chocolate · 2 lb",
-    price: "$34.99",
-    rating: "4.8",
-    image: wheyImage,
-    alt: "Whey Isolate Pro tub against a dark green backdrop.",
-    badge: "BESTSELLER",
-  },
-  {
-    id: "creatine-monohydrate",
-    name: "Creatine Monohydrate",
-    variant: "Unflavored · 300g",
-    price: "$19.99",
-    rating: "4.9",
-    image: creatineImage,
-    alt: "Creatine Monohydrate jar on a neutral beige background.",
-    badge: "BESTSELLER",
-  },
-  {
-    id: "pre-workout-ignite",
-    name: "Pre-Workout Ignite",
-    variant: "Citrus · 30 srv",
-    price: "$29.99",
-    rating: "4.7",
-    image: preWorkoutImage,
-    alt: "Pre-Workout Ignite tub on a bright orange background.",
-  },
-  {
-    id: "daily-vitality-pack",
-    name: "Daily Vitality Pack",
-    variant: "30-day supply",
-    price: "$24.99",
-    rating: "4.6",
-    image: vitalityImage,
-    alt: "Daily Vitality Pack supplement bottle on a light background.",
-  },
-];
+// Homepage teaser stays a curated 4, not the full catalog — see ShopGrid for the full list.
+const FEATURED_PRODUCTS = PRODUCTS.slice(0, 4);
 
 export function Bestsellers() {
   const { fadeUpItem, staggerContainer } = useMotionPreset();
+  const { quantityOf, updateQuantity } = useCart();
 
   return (
-    <section className="w-full bg-[#fafaf8]">
+    <section className="w-full bg-white">
       <Container>
         <div className="flex flex-col gap-[20px] pb-[24px] pt-[48px] lg:gap-[28px] lg:pb-[32px] lg:pt-[64px]">
           <div className="flex items-center justify-between gap-[16px]">
             <h2 className="font-['Archivo',sans-serif] text-[22px] font-bold text-[#14171a] lg:text-[28px]">Bestsellers</h2>
-            <a href="#" className={`font-['Inter',sans-serif] text-[12.5px] font-semibold text-[#32523d] hover:underline lg:text-[14px] ${linkClass}`}>
+            <Link to="/shop" className={`font-['Inter',sans-serif] text-[12.5px] font-semibold text-[#32523d] hover:underline lg:text-[14px] ${linkClass}`}>
               <span className="lg:hidden">View all →</span>
               <span className="hidden lg:inline">View all products →</span>
-            </a>
+            </Link>
           </div>
 
           <motion.ul
@@ -70,10 +32,14 @@ export function Bestsellers() {
             variants={staggerContainer()}
             className="grid grid-cols-2 gap-[14px] lg:grid-cols-4 lg:gap-[24px] lg:pb-[40px]"
           >
-            {PRODUCTS.map((product, index) => (
+            {FEATURED_PRODUCTS.map((product, index) => (
               <li key={product.id} className={index % 2 === 1 ? "lg:translate-y-[40px]" : undefined}>
                 <motion.div variants={fadeUpItem} className="h-full">
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    quantity={quantityOf(product.id)}
+                    onQuantityChange={(next) => updateQuantity(product.id, next)}
+                  />
                 </motion.div>
               </li>
             ))}

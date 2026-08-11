@@ -1,7 +1,9 @@
-export const NAV_LINKS = ["Shop", "Protein", "Performance", "Science", "About"] as const;
+// Protein still exists at /protein (linked from the homepage Categories section) — it's just not in the main nav.
+export const NAV_LINKS = ["Shop", "About", "Blog", "Contact"] as const;
 
-/** Only links with a real page get a route — everything else stays a `#` placeholder until that page exists. */
-export const NAV_HREFS: Partial<Record<(typeof NAV_LINKS)[number], string>> = {
-  Protein: "/protein",
+export const NAV_HREFS: Record<(typeof NAV_LINKS)[number], string> = {
+  Shop: "/shop",
   About: "/about",
+  Blog: "/blog",
+  Contact: "/contact",
 };

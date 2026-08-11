@@ -15,7 +15,7 @@ export function AboutTeam() {
   const { fadeUp, fadeUpItem, staggerContainer, transition } = useMotionPreset();
 
   return (
-    <section className="w-full bg-[#fafaf8]">
+    <section className="w-full bg-white">
       <Container>
         <div className="flex flex-col gap-[32px] py-[48px] lg:gap-[40px] lg:py-[80px]">
           <motion.h2

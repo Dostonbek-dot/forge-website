@@ -6,7 +6,7 @@ export function AboutManifesto() {
   const { fadeUp, transition } = useMotionPreset();
 
   return (
-    <section className="w-full bg-[#fafaf8]">
+    <section className="w-full bg-white">
       <Container>
         <motion.p
           initial="hidden"

@@ -10,7 +10,7 @@ export function ProteinClose() {
     // Deliberately no `overflow-hidden` here — the tub image is taller than the text column, so
     // centering it against the text (see `top-1/2 -translate-y-1/2` below) naturally lets it bleed
     // past this section's top edge into Label, echoing About's own CTA-close bleed treatment.
-    <section className="relative w-full bg-[#fafaf8]">
+    <section className="relative w-full bg-white">
       <Container>
         <div className="relative py-[64px] lg:py-[96px]">
           <motion.div

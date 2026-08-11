@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Container, fluid } from "./primitives";
-import { useMotionPreset, viewportOnce } from "./motion";
+import { useMotionPreset } from "./motion";
 
 const COMPACT_QUOTES = [
   {
@@ -16,17 +16,15 @@ const COMPACT_QUOTES = [
 ];
 
 export function Testimonials() {
-  const { fadeUp, transition } = useMotionPreset();
+  const { reduced } = useMotionPreset();
 
   return (
-    <section aria-label="Customer testimonials" className="w-full bg-[#fafaf8]">
+    <section aria-label="Customer testimonials" className="w-full bg-white">
       <Container>
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={fadeUp}
-          transition={transition()}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduced ? 0 : 0.3, ease: "easeOut" }}
           className="grid gap-[20px] pb-[24px] pt-[48px] lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-x-[64px] lg:pb-[56px] lg:pt-[53px] xl:grid-cols-[minmax(0,560px)_minmax(0,420px)] xl:gap-x-[160px]">
           <figure className="flex flex-col items-start gap-[20px] lg:max-w-[560px] lg:gap-0">
             <span

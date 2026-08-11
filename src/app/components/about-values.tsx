@@ -24,7 +24,7 @@ export function AboutValues() {
   const { fadeUp, fadeUpItem, staggerContainer, transition } = useMotionPreset();
 
   return (
-    <section className="w-full bg-[#fafaf8]">
+    <section className="w-full bg-white">
       <Container>
         <div className="flex flex-col gap-[32px] py-[48px] lg:gap-[48px] lg:py-[76px]">
           <motion.h2

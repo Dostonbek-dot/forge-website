@@ -39,7 +39,7 @@ export function ProteinLabel() {
               viewport={viewportOnce}
               variants={fadeUp}
               transition={transition(0.08)}
-              className="relative rounded-[16px] border border-white/15 bg-[#fafaf8] px-[24px] py-[24px] lg:rounded-[20px] lg:px-[32px] lg:py-[32px]"
+              className="relative rounded-[16px] border border-white/15 bg-white px-[24px] py-[24px] lg:rounded-[20px] lg:px-[32px] lg:py-[32px]"
             >
               <h3 className="font-['Inter',sans-serif] text-[12px] font-semibold uppercase tracking-[1.5px] text-[#14171a]">Supplement Facts</h3>
               <div className="mt-[12px] h-[2px] w-full bg-[#14171a]" />

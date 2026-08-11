@@ -32,7 +32,7 @@ export function MobileNav({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: reduced ? 0 : -12 }}
                 transition={transition}
-                className="fixed inset-0 z-[100] flex flex-col bg-[#fafaf8] lg:hidden"
+                className="fixed inset-0 z-[100] flex flex-col bg-white lg:hidden"
               >
                 <Dialog.Title className="sr-only">Main menu</Dialog.Title>
 
@@ -81,7 +81,9 @@ export function MobileNav({
 
                 <div className="px-[20px] pb-[32px] md:px-[40px]">
                   <Dialog.Close asChild>
-                    <PrimaryButton className="w-full">Shop Now</PrimaryButton>
+                    <PrimaryButton asChild className="w-full">
+                      <Link to="/shop">Shop Now</Link>
+                    </PrimaryButton>
                   </Dialog.Close>
                 </div>
               </motion.div>

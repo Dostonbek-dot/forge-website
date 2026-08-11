@@ -46,7 +46,7 @@ export function Categories() {
   const [openCategory, setOpenCategory] = useState<string | undefined>(undefined);
 
   return (
-    <section className="w-full bg-[#fafaf8]">
+    <section className="w-full bg-white">
       <Container>
         <motion.div
           initial="hidden"
@@ -69,7 +69,7 @@ export function Categories() {
                 alt="Creatine monohydrate powder with a measuring scoop on a dark slate surface."
                 className="absolute left-[-83.1%] top-[-72.5%] h-[172.5%] w-[186.5%] max-w-none object-cover"
               />
-              <span className="absolute bottom-[16px] left-[20px] font-['Archivo',sans-serif] text-[24px] font-bold text-[#fafaf8] lg:bottom-[20px] lg:left-[22px] lg:text-[22px]">
+              <span className="absolute bottom-[16px] left-[20px] font-['Archivo',sans-serif] text-[24px] font-bold text-white lg:bottom-[20px] lg:left-[22px] lg:text-[22px]">
                 Creatine
               </span>
             </a>

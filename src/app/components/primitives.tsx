@@ -1,5 +1,5 @@
 import { Slot } from "@radix-ui/react-slot";
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 /**
  * Page gutter matching Figma: 20px at 390px, growing to 120px at 1440px.
@@ -19,27 +19,27 @@ export function fluid(minPx: number, maxPx: number, minVw = 390, maxVw = 1440) {
   return `clamp(${minPx}px, ${(slope * 100).toFixed(4)}vw + ${intercept.toFixed(3)}px, ${maxPx}px)`;
 }
 
-const focusRing =
-  "outline-none focus-visible:ring-2 focus-visible:ring-[#32523d] focus-visible:ring-offset-2 focus-visible:ring-offset-[#fafaf8]";
+export const focusRing =
+  "outline-none focus-visible:ring-2 focus-visible:ring-[#32523d] focus-visible:ring-offset-2 focus-visible:ring-offset-white";
 
 // For use on the brand-green (#32523d) background itself, where the default
 // dark-on-transparent styling is invisible against its own backdrop.
 const focusRingInverted =
   "outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#32523d]";
 
-export function PrimaryButton({
-  children,
-  className = "",
-  asChild = false,
-  variant = "default",
-}: {
+type PrimaryButtonProps = ComponentPropsWithoutRef<"button"> & {
   children: ReactNode;
-  className?: string;
   /** Render as the child element (e.g. a router `Link`) instead of a `<button>` — for real navigation, not a button wrapping an anchor. */
   asChild?: boolean;
   /** "inverted" is for placement directly on the brand-green (#32523d) background — default is invisible there. */
   variant?: "default" | "inverted";
-}) {
+};
+
+// Forwards `...rest` (onClick, etc.) and `ref` so `asChild` composes correctly through
+// another `asChild`/Slot layer above it — e.g. `Dialog.Close asChild` wrapping
+// `<PrimaryButton asChild><Link .../></PrimaryButton>` needs Dialog.Close's injected
+// onClick (which closes the dialog) to reach the underlying `Link`, not get dropped here.
+export function PrimaryButton({ children, className = "", asChild = false, variant = "default", disabled = false, ...rest }: PrimaryButtonProps) {
   const Comp = asChild ? Slot : "button";
   // "inverted" values match Figma's export for the About page's CTA button exactly:
   // bg #5B7564, text #F8F8F6, font-weight 400 — a lighter weight than the default variant.
@@ -50,7 +50,9 @@ export function PrimaryButton({
   return (
     <Comp
       type={asChild ? undefined : "button"}
-      className={`inline-flex min-h-[44px] items-center justify-center rounded-[100px] px-[30px] py-[15px] font-['Inter',sans-serif] text-[14.5px] transition duration-200 ease-out active:scale-[0.97] ${variantClass} ${className}`}
+      disabled={asChild ? undefined : disabled}
+      className={`inline-flex min-h-[44px] items-center justify-center rounded-[100px] px-[30px] py-[15px] font-['Inter',sans-serif] text-[14.5px] transition duration-200 ease-out active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[#32523d] ${variantClass} ${className}`}
+      {...rest}
     >
       {children}
     </Comp>
