@@ -54,3 +54,43 @@ export function computeOrderTotals(subtotal: number): OrderTotals {
   const tax = subtotal * TAX_RATE;
   return { subtotal, tax, total: subtotal + tax };
 }
+
+const ORDERS_STORAGE_KEY = "forge-orders-v1";
+
+function isOrderSnapshot(value: unknown): value is OrderSnapshot {
+  if (typeof value !== "object" || value === null) return false;
+  const order = value as Partial<OrderSnapshot>;
+  return (
+    typeof order.orderNumber === "string" &&
+    typeof order.placedAt === "string" &&
+    typeof order.deliveryRange === "string" &&
+    Array.isArray(order.items) &&
+    typeof order.totals === "object" &&
+    order.totals !== null &&
+    typeof order.totals.total === "number" &&
+    typeof order.shipping === "object" &&
+    order.shipping !== null &&
+    typeof order.shipping.fullName === "string"
+  );
+}
+
+export function saveOrder(order: OrderSnapshot): void {
+  const history = getOrderHistory();
+  window.localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify([order, ...history]));
+}
+
+export function getOrderHistory(): OrderSnapshot[] {
+  try {
+    const raw = window.localStorage.getItem(ORDERS_STORAGE_KEY);
+    if (!raw) return [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.filter(isOrderSnapshot);
+  } catch {
+    return [];
+  }
+}
+
+export function clearOrderHistory(): void {
+  window.localStorage.removeItem(ORDERS_STORAGE_KEY);
+}

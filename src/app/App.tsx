@@ -4,6 +4,7 @@ import { CartProvider } from "./context/CartContext";
 import { SiteFooter } from "./components/site-footer";
 import { SiteNav } from "./components/site-nav";
 import { AboutPage } from "./pages/AboutPage";
+import { AdminPage } from "./pages/AdminPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
@@ -32,6 +33,7 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/protein" element={<ProteinPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/shop" element={<ShopPage />} />

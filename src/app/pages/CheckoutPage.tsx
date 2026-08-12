@@ -6,7 +6,7 @@ import { useCart } from "../context/CartContext";
 import { Container, PrimaryButton, focusRing } from "../components/primitives";
 import { OrderSummary } from "../components/order-summary";
 import { useMotionPreset } from "../components/motion";
-import { computeOrderTotals, estimateDeliveryRange, generateOrderNumber, type OrderSnapshot } from "../data/order";
+import { computeOrderTotals, estimateDeliveryRange, generateOrderNumber, saveOrder, type OrderSnapshot } from "../data/order";
 
 type CheckoutFormValues = {
   email: string;
@@ -88,6 +88,7 @@ export function CheckoutPage() {
         deliveryRange: estimateDeliveryRange(),
       };
       orderPlacedRef.current = true;
+      saveOrder(snapshot);
       clearCart();
       navigate("/order-confirmation", { state: { order: snapshot } });
     } finally {
