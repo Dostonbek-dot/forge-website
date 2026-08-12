@@ -14,13 +14,13 @@ export function BlogHero() {
           animate="visible"
           variants={fadeUp}
           transition={transition()}
-          className="flex flex-col items-start gap-[12px] py-[48px] lg:gap-[16px] lg:py-[72px]"
+          className="flex flex-col items-start gap-[12px] py-[32px] lg:gap-[16px] lg:py-[48px]"
         >
           <h1 className="font-['Archivo',sans-serif] text-[32px] font-bold tracking-[-0.6px] text-[#14171a] lg:text-[48px] lg:tracking-[-1px]">
-            The Label
+            Inside the Formula
           </h1>
           <p className="max-w-[480px] font-['Inter',sans-serif] text-[14.5px] leading-[1.55] text-[#737870] lg:text-[16px]">
-            Notes on dosing, testing and the parts of the industry most brands would rather you didn't read about.
+            A closer look at ingredients, dosages, claims, and the science behind them.
           </p>
         </motion.div>
       </Container>
