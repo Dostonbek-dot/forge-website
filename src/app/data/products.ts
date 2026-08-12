@@ -1,4 +1,4 @@
-import creatineImage from "../../imports/HomeDesktopWeb/creatine-monohydrate-v2.webp";
+import creatineImage from "../../imports/HomeDesktopWeb/creatine-monohydrate-nova-labs.webp";
 import vitalityImage from "../../imports/HomeDesktopWeb/c2ca437d27f4f830ffdede88eec53b2ae6abb28e.webp";
 import preWorkoutImage from "../../imports/HomeDesktopWeb/a8bc9982346d4c2fce4fcf9eded71f8615318efb.webp";
 import wheyImage from "../../imports/HomeDesktopWeb/whey-isolate-pro-v2.webp";
