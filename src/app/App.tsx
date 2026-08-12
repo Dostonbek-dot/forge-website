@@ -6,8 +6,10 @@ import { SiteNav } from "./components/site-nav";
 import { AboutPage } from "./pages/AboutPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
+import { CheckoutPage } from "./pages/CheckoutPage";
 import { ContactPage } from "./pages/ContactPage";
 import { HomePage } from "./pages/HomePage";
+import { OrderConfirmationPage } from "./pages/OrderConfirmationPage";
 import { ProteinPage } from "./pages/ProteinPage";
 import { ShopPage } from "./pages/ShopPage";
 
@@ -33,6 +35,8 @@ export default function App() {
             <Route path="/protein" element={<ProteinPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/shop" element={<ShopPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/contact" element={<ContactPage />} />

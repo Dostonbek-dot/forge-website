@@ -122,9 +122,11 @@ export function CartDrawer() {
                       <span>Subtotal</span>
                       <span>${subtotal.toFixed(2)}</span>
                     </div>
-                    <PrimaryButton className="w-full" disabled>
-                      Checkout (coming soon)
-                    </PrimaryButton>
+                    <Dialog.Close asChild>
+                      <PrimaryButton asChild className="w-full">
+                        <Link to="/checkout">Checkout</Link>
+                      </PrimaryButton>
+                    </Dialog.Close>
                   </div>
                 ) : null}
               </motion.div>
