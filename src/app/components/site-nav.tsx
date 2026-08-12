@@ -22,8 +22,8 @@ export function SiteNav() {
             FORGE
           </Link>
 
-          <div className="flex items-center lg:gap-[32px]">
-            <ul className="hidden items-center gap-[6px] lg:flex">
+          <div className="flex items-center lg:gap-[38px]">
+            <ul className="hidden items-center gap-[40px] lg:flex">
               {NAV_LINKS.map((label) => {
                 const href = NAV_HREFS[label];
                 const className = `font-['Inter',sans-serif] text-[14px] font-medium text-[#14171a] hover:text-[#32523d] ${linkClass}`;
