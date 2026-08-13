@@ -118,7 +118,7 @@ export function CheckoutPage() {
           </p>
 
           <form onSubmit={handleSubmit(onFormSubmit)} className="mt-[24px] grid grid-cols-1 gap-[32px] lg:grid-cols-[1fr_380px] lg:gap-[40px]">
-            <div className="flex flex-col gap-[28px]">
+            <div className="flex w-full flex-col gap-[28px] lg:max-w-[580px]">
               {step === "shipping" ? (
                 <>
                   <fieldset className="flex flex-col gap-[14px]">
