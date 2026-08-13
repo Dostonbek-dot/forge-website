@@ -64,6 +64,7 @@ export function OrderConfirmationPage() {
               {order.shipping.fullName}
               <br />
               {order.shipping.addressLine1}
+              {order.shipping.addressLine2 ? <> {order.shipping.addressLine2}</> : null}
               <br />
               {order.shipping.city}, {order.shipping.region}
               <br />

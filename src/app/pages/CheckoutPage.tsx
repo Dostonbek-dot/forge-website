@@ -13,6 +13,7 @@ type CheckoutFormValues = {
   phone: string;
   fullName: string;
   addressLine1: string;
+  addressLine2: string;
   city: string;
   region: string;
   country: string;
@@ -48,15 +49,21 @@ export function CheckoutPage() {
   const { fadeUp, transition } = useMotionPreset();
   const [step, setStep] = useState<Step>("shipping");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showAddressLine2, setShowAddressLine2] = useState(false);
   const orderPlacedRef = useRef(false);
 
   const {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm<CheckoutFormValues>({
     defaultValues: { country: "Uzbekistan" },
   });
+
+  useEffect(() => {
+    if (showAddressLine2) setFocus("addressLine2");
+  }, [showAddressLine2, setFocus]);
 
   useEffect(() => {
     if (items.length === 0 && !orderPlacedRef.current) navigate("/shop", { replace: true });
@@ -85,6 +92,7 @@ export function CheckoutPage() {
           email: values.email,
           phone: values.phone,
           addressLine1: values.addressLine1,
+          addressLine2: values.addressLine2 ?? "",
           city: values.city,
           region: values.region,
           country: values.country,
@@ -144,6 +152,17 @@ export function CheckoutPage() {
                       error={errors.addressLine1?.message}
                       {...register("addressLine1", { required: "Address is required" })}
                     />
+                    {showAddressLine2 ? (
+                      <Field label="Apartment, suite, etc." placeholder="Apt, suite, etc." {...register("addressLine2")} />
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setShowAddressLine2(true)}
+                        className={`self-start font-['Inter',sans-serif] text-[13px] font-semibold text-[#32523d] hover:underline ${linkClass}`}
+                      >
+                        + Add apartment, suite, etc.
+                      </button>
+                    )}
                     <div className="grid grid-cols-1 gap-[14px] sm:grid-cols-2">
                       <Field label="City" error={errors.city?.message} {...register("city", { required: "Required" })} />
                       <Field label="Region" error={errors.region?.message} {...register("region", { required: "Required" })} />
