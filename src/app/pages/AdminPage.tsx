@@ -84,7 +84,8 @@ export function AdminPage() {
                           {order.shipping.addressLine1}
                           {order.shipping.addressLine2 ? <> {order.shipping.addressLine2}</> : null}
                           <br />
-                          {order.shipping.city}, {order.shipping.region}
+                          {order.shipping.city}
+                          {order.shipping.region ? `, ${order.shipping.region}` : null}
                           <br />
                           {order.shipping.country}
                         </p>

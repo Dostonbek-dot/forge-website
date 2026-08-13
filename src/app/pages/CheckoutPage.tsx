@@ -165,7 +165,7 @@ export function CheckoutPage() {
                     )}
                     <div className="grid grid-cols-1 gap-[14px] sm:grid-cols-2">
                       <Field label="City" error={errors.city?.message} {...register("city", { required: "Required" })} />
-                      <Field label="Region" error={errors.region?.message} {...register("region", { required: "Required" })} />
+                      <Field label="Region (optional)" error={errors.region?.message} {...register("region")} />
                     </div>
                     <Field label="Country" readOnly {...register("country")} />
                   </fieldset>
